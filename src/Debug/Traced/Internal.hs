@@ -2,7 +2,7 @@
 #if __GLASGOW_HASKELL__ < 710
 {-# LANGUAGE OverlappingInstances #-}
 #endif
-module Debug.TracedInternal(
+module Debug.Traced.Internal(
            Traced, traced, named, nameTraced, unknown, unTraced, tracedD,
            TraceLevel(..), Traceable(..),
            TracedD(..), unTracedD,
@@ -32,7 +32,7 @@ import qualified Data.Set as S
 import Text.PrettyPrint.HughesPJ
 --import Debug.Trace
 
-import qualified Debug.StableMap as SM
+import qualified Debug.Traced.StableMap as SM
 
 -- | Traced values of some type.
 data Traced a = Traced (Maybe TracedD) a

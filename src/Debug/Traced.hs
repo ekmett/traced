@@ -27,7 +27,7 @@ module Debug.Traced(
 
            ) where
 import Data.Typeable(Typeable)
-import Debug.TracedInternal
+import Debug.Traced.Internal
 
 -- Boolean operations
 
