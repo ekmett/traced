@@ -20,32 +20,31 @@
 --
 -- $examples
 -----------------------------------------------------------------------------
-module Debug.Traced(
-           Traced, traced, named, nameTraced, unknown, unTraced, tracedD,
-           TracedD, unTracedD,
-           Traceable,
-           liftT, liftFun, Liftable,
+module Debug.Traced
+  ( Traced, traced, named, nameTraced
+  , unknown, unTraced, tracedD,
+  , TracedD, unTracedD,
+  , Traceable,
+  , liftT, liftFun, Liftable,
+  , showAsExp, showAsExpFull,
+  , reShare, simplify,
+  , ifT, (%==), (%/=), (%<), (%<=), (%>), (%>=),
+  , (%&&), (%||), tnot,
+  , TracedExp, tracedExp, namedExp
+  ) where
 
-           showAsExp, showAsExpFull,
-           reShare, simplify,
-
-           ifT, (%==), (%/=), (%<), (%<=), (%>), (%>=),
-           (%&&), (%||), tnot,
-
-           TracedExp, tracedExp, namedExp
-
-           ) where
-import Data.Typeable(Typeable)
+import Data.Typeable (Typeable)
 import Debug.Traced.Internal
 
 -- Boolean operations
 
 -- |Traced version of /if/.
 ifT :: (Traceable a) => Traced Bool -> Traced a -> Traced a -> Traced a
-ifT c t e = apply (unTraced $ if b then t else e) "ifT" Nonfix $ tracedD c : if b then [tracedD t, none] else [none, tracedD e]
-  where none = tracedD u
-        u = unknown "..." `asTypeOf` t
-        b = unTraced c
+ifT c t e = apply (unTraced $ if b then t else e) "ifT" Nonfix $
+  tracedD c : if b then [tracedD t, none] else [none, tracedD e] where
+    none = tracedD u
+    u = unknown "..." `asTypeOf` t
+    b = unTraced c
 
 infix 4 %==, %/=, %<, %<=, %>, %>=
 -- |Comparisons generating traced booleans.
@@ -71,11 +70,13 @@ tnot = unOp not "not"
 -----------------------------------
 
 -- |A wrapper for 'Traced' to show it with full details.
-newtype TracedExp a = TracedExp (Traced a)
-    deriving (Typeable, Eq, Ord, Num, Fractional, Integral, Enum, Real, RealFrac, Floating, RealFloat)
+newtype TracedExp a = TracedExp (Traced a) deriving 
+  ( Typeable, Eq, Ord, Num, Fractional, Integral
+  , Enum, Real, RealFrac, Floating, RealFloat
+  )
 
 instance (Traceable a, Show a) => Show (TracedExp a) where
-    show (TracedExp x) = showAsExpFull x
+  show (TracedExp x) = showAsExpFull x
 
 tracedExp :: (Traceable a) => a -> TracedExp a
 tracedExp = TracedExp . traced

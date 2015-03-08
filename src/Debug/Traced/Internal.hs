@@ -11,17 +11,21 @@
 -- Portability :  non-portable
 --
 -----------------------------------------------------------------------------
-module Debug.Traced.Internal(
-           Traced, traced, named, nameTraced, unknown, unTraced, tracedD,
-           TraceLevel(..), Traceable(..),
-           TracedD(..), unTracedD,
-           binOp, unOp, apply,
-           liftT, liftFun, Liftable(..), baseLiftT,
-           Fixity(..),
-           showAsExp, showAsExpFull,
-           pPrintTraced,
-           reShare, simplify
-           ) where
+module Debug.Traced.Internal
+  ( Traced, traced
+  , named, nameTraced
+  , unknown, unTraced
+  , tracedD,
+  , TraceLevel(..), Traceable(..),
+  , TracedD(..), unTracedD,
+  , binOp, unOp, apply,
+  , liftT, liftFun, Liftable(..), baseLiftT,
+  , Fixity(..),
+  , showAsExp, showAsExpFull,
+  , pPrintTraced,
+  , reShare, simplify
+  ) where
+
 import System.Mem.StableName
 import System.IO.Unsafe(unsafePerformIO)
 import Data.Typeable
