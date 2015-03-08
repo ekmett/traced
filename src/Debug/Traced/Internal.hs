@@ -29,7 +29,7 @@ module Debug.Traced.Internal
 import System.Mem.StableName
 import System.IO.Unsafe(unsafePerformIO)
 import Data.Typeable
-#if __GLASGOW_HASKELL__ >= 706
+#if __GLASGOW_HASKELL__ >= 704
 import Data.Data(Data(..), mkNoRepType)
 #elif __GLASGOW_HASKELL__ >= 610
 import Data.Data(Data(..), mkNorepType)
