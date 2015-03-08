@@ -11,7 +11,7 @@ build-type:     Simple
 description:    The module defines a type constructor 'Traced', which allows evaluation
                 of values to be traced.  Instances for all numeric types make tracing
                 numeric evaluation especially easy.
-extra-source-files: .travis.yml README.markdown
+extra-source-files: .gitignore .travis.yml README.markdown CHANGELOG.markdown
 
 source-repository head
   type: git
