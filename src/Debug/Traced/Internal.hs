@@ -96,20 +96,20 @@ instance Eq TracedD where
 
 -- Pure structural comparison, good for putting values into a map
 instance Ord TracedD where
-  compare NoValue NoValue = EQ
-  compare NoValue _       = LT
-  compare (Name _ _ _) NoValue = GT
-  compare (Name b1 n1 v1) (Name b2 n2 v2) = compare (b1, n1, v1) (b2, n2, v2)
-  compare (Name _ _ _) _ = LT
-  compare (Con _) NoValue = GT
-  compare (Con _) (Name _ _ _) = GT
-  compare (Con a1) (Con a2) = compareValues a1 a2
-  compare (Con _) _ = LT
+  compare NoValue             NoValue             = EQ
+  compare NoValue             _                   = LT
+  compare Name{}              NoValue             = GT
+  compare (Name b1 n1 v1)     (Name b2 n2 v2)     = compare (b1, n1, v1) (b2, n2, v2)
+  compare Name{}              _                   = LT
+  compare Con{}               NoValue             = GT
+  compare Con{}               Name{}              = GT
+  compare (Con a1)            (Con a2)            = compareValues a1 a2
+  compare Con{}               _                   = LT
   compare (Apply _ n1 f1 as1) (Apply _ n2 f2 as2) = compare (n1, f1, as1) (n2, f2, as2)
-  compare (Apply _ _ _ _) (Let _ _) = LT
-  compare (Apply _ _ _ _) _ = GT
-  compare (Let bs1 t1) (Let bs2 t2) = compare (bs1, t1) (bs2, t2)
-  compare (Let _ _) _ = GT
+  compare Apply{}             Let{}               = LT
+  compare Apply{}             _                   = GT
+  compare (Let bs1 t1)        (Let bs2 t2)        = compare (bs1, t1) (bs2, t2)
+  compare Let{}               _                   = GT
 
 -- We need an ordering on values (possibly of different types).
 -- It doesn't matter what the ordering is, as long as it's total.
@@ -117,7 +117,7 @@ instance Ord TracedD where
 -- identifier for the value and the compare those.
 compareValues :: (Traceable a, Traceable b) => a -> b -> Ordering
 compareValues x y = compare (uniq x) (uniq y) where
-   uniq a = seq a $ hashStableName (unsafePerformIO $ makeStableName a)
+  uniq a = seq a $ hashStableName (unsafePerformIO $ makeStableName a)
 
 -- |Fixity for identifier.
 data Fixity = InfixL Int | InfixR Int | Infix Int | Nonfix
@@ -313,7 +313,7 @@ ppTracedD b     p (Apply _ op f [x,y]) =
         op' = if isAlpha (head op) then "`" ++ op ++ "`" else op
     in  ppParens (p > q) $
         sep [ppTracedD b ql x <+> text op', ppTracedD b qr y]
-ppTracedD _     _ (Apply _ _ _ _) = error "ppTracedD: bad binop"
+ppTracedD _     _ Apply{} = error "ppTracedD: bad binop"
 ppTracedD b     p (Let bs v) =
     ppParens (p > 0) $
     sep (text "let" : map (nest 4 . ppBind) bs ++ [text "in  " <> ppTracedD b 0 v])
@@ -357,8 +357,7 @@ share' e = do
   (i, sm, bs) <- get
   sn <- liftIO $ e `seq` makeStableName e
   case SM.lookup sn sm of
-    Just ie -> do --liftIO $ putStrLn "Found";
-                  return ie
+    Just ie -> return ie
     Nothing -> do
       let n = case e of
             Name _ s _ -> s   -- reuse the user name
