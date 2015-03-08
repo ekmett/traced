@@ -1,4 +1,19 @@
-module Debug.Traced.StableMap(StableMap, empty, insert, Debug.Traced.StableMap.lookup) where
+-----------------------------------------------------------------------------
+-- |
+-- Copyright   :  (C) 2012-15 Edward Kmett, 2008-2009 Lennart Augustsson
+-- License     :  BSD-style (see the file LICENSE)
+-- Maintainer  :  Edward Kmett <ekmett@gmail.com>
+-- Stability   :  experimental
+-- Portability :  non-portable
+--
+-----------------------------------------------------------------------------
+module Debug.Traced.StableMap
+  ( StableMap
+  , empty
+  , insert
+  , Debug.Traced.StableMap.lookup
+  ) where
+
 import qualified Data.IntMap as M
 import System.Mem.StableName
 

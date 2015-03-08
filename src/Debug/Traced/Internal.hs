@@ -2,6 +2,15 @@
 #if __GLASGOW_HASKELL__ < 710
 {-# LANGUAGE OverlappingInstances #-}
 #endif
+-----------------------------------------------------------------------------
+-- |
+-- Copyright   :  (C) 2012-15 Edward Kmett, 2008-2009 Lennart Augustsson
+-- License     :  BSD-style (see the file LICENSE)
+-- Maintainer  :  Edward Kmett <ekmett@gmail.com>
+-- Stability   :  experimental
+-- Portability :  non-portable
+--
+-----------------------------------------------------------------------------
 module Debug.Traced.Internal(
            Traced, traced, named, nameTraced, unknown, unTraced, tracedD,
            TraceLevel(..), Traceable(..),

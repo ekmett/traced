@@ -1,4 +1,12 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving, DeriveDataTypeable #-}
+-----------------------------------------------------------------------------
+-- |
+-- Copyright   :  (C) 2014-15 Edward Kmett, 2008-2009 Lennart Augustsson
+-- License     :  BSD-style (see the file LICENSE)
+-- Maintainer  :  Edward Kmett <ekmett@gmail.com>
+-- Stability   :  provisional
+-- Portability :  portable
+--
 -- |The "Traced" module provides a simple way of tracing expression evaluation.
 -- A value of type @Traced a@ has both a value of type @a@ and an expression tree
 -- that describes how the value was computed.
@@ -11,6 +19,7 @@
 -- This sharing can be recovered by the (impure) 'reShare' function.
 --
 -- $examples
+-----------------------------------------------------------------------------
 module Debug.Traced(
            Traced, traced, named, nameTraced, unknown, unTraced, tracedD,
            TracedD, unTracedD,
