@@ -78,7 +78,7 @@ instance Data TracedD where
   gfoldl _ z c = z c
   gunfold _ _ _ = error "gunfold: TracedD"
   toConstr _ = error "toConstr: TracedD"
-#if __GLASGOW_HASKELL__ >= 706
+#if __GLASGOW_HASKELL__ >= 704
   dataTypeOf _ = mkNoRepType "Debug.TracedInternal.TracedD"
 #else
   dataTypeOf _ = mkNorepType "Debug.TracedInternal.TracedD"
