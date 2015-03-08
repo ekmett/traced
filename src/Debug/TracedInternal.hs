@@ -1,4 +1,7 @@
-{-# LANGUAGE CPP, ExistentialQuantification, GeneralizedNewtypeDeriving, MultiParamTypeClasses, FunctionalDependencies, FlexibleInstances, UndecidableInstances, FlexibleContexts, DeriveDataTypeable, OverlappingInstances #-}
+{-# LANGUAGE CPP, ExistentialQuantification, GeneralizedNewtypeDeriving, MultiParamTypeClasses, FunctionalDependencies, FlexibleInstances, UndecidableInstances, FlexibleContexts, DeriveDataTypeable #-}
+#if __GLASGOW_HASKELL__ < 710
+{-# LANGUAGE OverlappingInstances #-}
+#endif
 module Debug.TracedInternal(
            Traced, traced, named, nameTraced, unknown, unTraced, tracedD,
            TraceLevel(..), Traceable(..),
