@@ -22,14 +22,14 @@
 -----------------------------------------------------------------------------
 module Debug.Traced
   ( Traced, traced, named, nameTraced
-  , unknown, unTraced, tracedD,
-  , TracedD, unTracedD,
-  , Traceable,
-  , liftT, liftFun, Liftable,
-  , showAsExp, showAsExpFull,
-  , reShare, simplify,
-  , ifT, (%==), (%/=), (%<), (%<=), (%>), (%>=),
-  , (%&&), (%||), tnot,
+  , unknown, unTraced, tracedD
+  , TracedD, unTracedD
+  , Traceable
+  , liftT, liftFun, Liftable
+  , showAsExp, showAsExpFull
+  , reShare, simplify
+  , ifT, (%==), (%/=), (%<), (%<=), (%>), (%>=)
+  , (%&&), (%||), tnot
   , TracedExp, tracedExp, namedExp
   ) where
 

@@ -15,14 +15,14 @@ module Debug.Traced.Internal
   ( Traced, traced
   , named, nameTraced
   , unknown, unTraced
-  , tracedD,
-  , TraceLevel(..), Traceable(..),
-  , TracedD(..), unTracedD,
-  , binOp, unOp, apply,
-  , liftT, liftFun, Liftable(..), baseLiftT,
-  , Fixity(..),
-  , showAsExp, showAsExpFull,
-  , pPrintTraced,
+  , tracedD
+  , TraceLevel(..), Traceable(..)
+  , TracedD(..), unTracedD
+  , binOp, unOp, apply
+  , liftT, liftFun, Liftable(..), baseLiftT
+  , Fixity(..)
+  , showAsExp, showAsExpFull
+  , pPrintTraced
   , reShare, simplify
   ) where
 
