@@ -172,7 +172,7 @@ class Liftable a b | a -> b, b -> a where
   liftT' :: Name -> Fixity -> [TracedD] -> a -> b
 
 instance (Traceable a, Liftable b tb) => Liftable (a -> b) (Traced a -> tb) where
-  liftT' n fx as f = \ x -> liftT' n fx (tracedD x:as) (f (unTraced x))
+  liftT' n fx as f x = liftT' n fx (tracedD x:as) (f (unTraced x))
 
 baseLiftT :: (Traceable a) => Name -> Fixity -> [TracedD] -> a -> Traced a
 baseLiftT n fx as r = Traced (Just $ Apply r n fx (reverse as)) r
