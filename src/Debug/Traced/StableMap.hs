@@ -1,4 +1,4 @@
-module Debug.Traced.StableMap(StableMap, empty, insert, Debug.StableMap.lookup) where
+module Debug.Traced.StableMap(StableMap, empty, insert, Debug.Traced.StableMap.lookup) where
 import qualified Data.IntMap as M
 import System.Mem.StableName
 
