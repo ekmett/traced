@@ -17,7 +17,7 @@ module Debug.Traced(
            Traceable,
            liftT, liftFun, Liftable,
 
-	   showAsExp, showAsExpFull,
+           showAsExp, showAsExpFull,
            reShare, simplify,
 
            ifT, (%==), (%/=), (%<), (%<=), (%>), (%>=),

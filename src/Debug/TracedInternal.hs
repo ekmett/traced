@@ -6,7 +6,7 @@ module Debug.TracedInternal(
            binOp, unOp, apply,
            liftT, liftFun, Liftable(..), baseLiftT,
            Fixity(..),
-	   showAsExp, showAsExpFull,
+           showAsExp, showAsExpFull,
            pPrintTraced,
            reShare, simplify
            ) where
@@ -292,9 +292,9 @@ ppTracedD b     p (Apply _ op Nonfix as) =
 ppTracedD b     p (Apply _ op f [x,y]) =
     let (ql,q,qr) = case f of
                     InfixL d -> (d,d,d+1)
-		    InfixR d -> (d+1,d,d)
-		    Infix  d -> (d+1,d,d+1)
-		    Nonfix   -> error "ppTracedD: impossible"
+                    InfixR d -> (d+1,d,d)
+                    Infix  d -> (d+1,d,d+1)
+                    Nonfix   -> error "ppTracedD: impossible"
         op' = if isAlpha (head op) then "`" ++ op ++ "`" else op
     in  ppParens (p > q) $
         sep [ppTracedD b ql x <+> text op', ppTracedD b qr y]
@@ -348,17 +348,17 @@ share' e = do
             let n = case e of
                     Name _ s _ -> s   -- reuse the user name
                     _ -> prefix ++ show i
-	        ie = Name True n e
+                ie = Name True n e
             put (i+1, SM.insert sn ie sm, bs)
-	    e' <- case e of
-	          NoValue -> return e
-		  Name b m a -> liftM (Name b m) $ share' a
-		  Con _ -> return e
-		  Apply a m fx as -> liftM (Apply a m fx) $ mapM share' as
-		  Let _ _ -> error "share': Let"
-	    (i', sm', bs') <- get
+            e' <- case e of
+                  NoValue -> return e
+                  Name b m a -> liftM (Name b m) $ share' a
+                  Con _ -> return e
+                  Apply a m fx as -> liftM (Apply a m fx) $ mapM share' as
+                  Let _ _ -> error "share': Let"
+            (i', sm', bs') <- get
             put (i', sm', (n, e') : bs')
-	    return ie
+            return ie
 
 prefix :: String
 prefix = "_"
